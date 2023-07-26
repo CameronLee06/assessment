@@ -1,6 +1,4 @@
-
 def yes_no(question):
-
     valid = False
     while not valid:
         response = input(question).lower()
@@ -15,13 +13,65 @@ def yes_no(question):
             print("Please answer yes / no")
 
 
-show_instructions = ""
-while show_instructions.lower() != "xxx":
-    # Ask the user if they want to see how to make a burger (incase they dont know)
-    show_instructions = yes_no("Would you like to see how to make a burger?")
+def not_blank(prompt, error):
+    while True:
+        response = input(prompt)
+        if response == "":
+            print(f"{error}. Please try again.")
+        else:
+            return response
 
-    if show_instructions == "yes":
-        print("A burger uses these main ingredients...\n")
-    elif show_instructions == "no":
-        print("sweet, lets make a burger! \n")
 
+def num_check(question, error, num_type):
+    valid = False
+    while not valid:
+        response = num_type(input(question))
+
+        if response <= 0:
+            print(error)
+        else:
+            return response
+
+
+def main():
+    while True:
+        print("\nIngredient Price Management")
+        print("1. Add an ingredient price")
+        print("2. Calculate total price")
+        print("3. Exit")
+        choice = input("Enter your choice (1-3): ")
+
+        if choice == "1":
+            add_ingredient_price()
+        elif choice == "2":
+            calculate_total_price()
+        elif choice == "3":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+def calculate_total_price():
+    total_price = sum(info["price"] for info in ingredient_prices.values())
+    print(f"The total price of all ingredients is ${total_price:.2f}.")
+
+
+def add_ingredient_price():
+    ingredient_name = input("Enter the name of the ingredient: ")
+    ingredient_price = float(input("Enter the price of the ingredient: $"))
+    ingredient_unit = input("Enter the unit of the ingredient: ")
+    ingredient_prices[ingredient_name] = {"price": ingredient_price, "unit": ingredient_unit}
+    print(f"Ingredient '{ingredient_name}' with price ${ingredient_price:.2f} per {ingredient_unit} has been added.")
+
+
+# main routine goes here
+product_name = not_blank("What is the name of the recipe? ",
+                         "Sorry - the product name can't be blank, please try again")
+print()
+how_many = num_check("How many people are you making for? ", "Please enter an amount that is more than 0", int)
+print()
+
+ingredient_prices = {}
+
+if __name__ == '__main__':
+    main()

@@ -84,7 +84,7 @@ print()
 recipe_amount = ""
 bought_amount = ""
 ingredient_price = ""
-cost_per_unit = ""
+cost_to_make = ""
 
 while True:
 
@@ -97,17 +97,28 @@ while True:
         print("You must enter an ingredient name")
         continue
 
+    print(f"You have entered {ingredient_name} as an ingredient")
+    print()
+
     ingredient_price = num_check("How much did you buy the ingredient for?: $",
                                  "please enter a valid number", float)
+
+    print(f"You have entered that {ingredient_name} costs: {ingredient_price}")
     print()
+
     recipe_amount = num_check("How much do you need? (in grams)?: ",
                               "please enter a valid number", float)
+    print(f"You have entered that you need {recipe_amount}g for your recipe")
     print()
+
     bought_amount = num_check("How much did you buy (in grams)?: ",
                               "please enter a valid number", float)
+
+    print(f"You have entered that you bought {bought_amount} of {ingredient_name}")
     print()
+
     ingredient_unit = input("Enter the unit of the ingredient: ")
-    print()
+    print(f"The unit is in grams. ")
 
     cost_per_unit = (ingredient_price / bought_amount * recipe_amount)
 
@@ -117,7 +128,7 @@ while True:
     all_bought_amount.append(bought_amount)
     all_ingredient_price.append(ingredient_price)
     all_cost_to_make.append(cost_per_unit)
-    
+
 # make the panda..
 recipe_panda_frame = pandas.DataFrame(recipe_dict)
 
@@ -125,3 +136,5 @@ recipe_panda_frame = pandas.DataFrame(recipe_dict)
 total_cost = recipe_panda_frame["Cost to make"].sum()
 cost_per_serving = total_cost / how_many
 print(recipe_panda_frame)
+print("Total Cost = ${:.2f}".format(total_cost))
+print("Cost Per Serving = ${:.2f}".format(cost_per_serving))

@@ -1,6 +1,7 @@
 import pandas
 
 
+# Asks the user yes / no
 def yes_no(question):
     valid = False
     while not valid:
@@ -16,6 +17,7 @@ def yes_no(question):
             print("Please answer yes / no")
 
 
+# checks that user response is not blank
 def not_blank(prompt, error):
     while True:
         response = input(prompt)
@@ -25,6 +27,7 @@ def not_blank(prompt, error):
             return response
 
 
+# checks user enters an integer to a given question
 def num_check(question, error, num_type):
     valid = False
     while not valid:
@@ -41,6 +44,7 @@ def num_check(question, error, num_type):
             print(error)
 
 
+# Finds if the user has entered a specific word / letter
 def string_checker(question, num_letters, valid_responses, ):
     error = "Please choose {} or {}".format(valid_responses[0],
                                             valid_responses[1])
@@ -55,11 +59,14 @@ def string_checker(question, num_letters, valid_responses, ):
         print(error)
 
 
+# currency formatting function
 def format_currency(x):
     return "${:,.2f}".format(x)
 
 
 # main routine goes here
+
+# Set up dictionaries and lists
 all_ingredient_name = []
 all_ingredient_price = []
 all_recipe_amount = []
@@ -73,10 +80,12 @@ recipe_dict = {
     'Price': all_ingredient_price,
     "Cost to make": all_cost_to_make,
 }
-
+# Asks the user for the name of recipe
 recipe_name = not_blank("What is the name of the recipe? ",
                         "Sorry - the product name can't be blank, please try again")
 print()
+
+# Asks the user for the amount of servings
 how_many = num_check("How many people are you making for? ",
                      "Please enter an amount that is more than 0", int)
 print()
@@ -86,6 +95,7 @@ bought_amount = ""
 ingredient_price = ""
 cost_to_make = ""
 
+# loop to get ingredient name, bought and needed amount, price and unit
 while True:
 
     ingredient_name = not_blank("What is the name of the ingredient(s) that you are using?",
@@ -126,7 +136,7 @@ while True:
 
     cost_per_unit = (ingredient_price / bought_amount * recipe_amount)
 
-    # add content to lists!!
+    # add content to lists
     all_ingredient_name.append(ingredient_name)
     all_recipe_amount.append(recipe_amount)
     all_bought_amount.append(bought_amount)

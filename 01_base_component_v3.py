@@ -103,22 +103,26 @@ while True:
     ingredient_price = num_check("How much did you buy the ingredient for?: $",
                                  "please enter a valid number", float)
 
-    print(f"You have entered that {ingredient_name} costs: {ingredient_price}")
+    print(f"You have entered that {ingredient_name} costs: ${ingredient_price}")
     print()
 
-    recipe_amount = num_check("How much do you need? (in grams)?: ",
+    ingredient_unit = input("Enter the unit of the ingredient (has "
+                            "to be either g, ml or blank): ")
+    print(f"The unit is in {ingredient_unit}")
+
+    recipe_amount = num_check(f"How much {ingredient_name} do you need?",
                               "please enter a valid number", float)
-    print(f"You have entered that you need {recipe_amount}g for your recipe")
+
+    print(f"You have entered that you need {recipe_amount}{ingredient_unit}"
+          f" for your recipe")
     print()
 
-    bought_amount = num_check("How much did you buy (in grams)?: ",
+    bought_amount = num_check("How much did you buy?: ",
                               "please enter a valid number", float)
 
-    print(f"You have entered that you bought {bought_amount} of {ingredient_name}")
+    print(f"You have entered that you bought {bought_amount}{ingredient_unit}"
+          f" of {ingredient_name}")
     print()
-
-    ingredient_unit = input("Enter the unit of the ingredient: ")
-    print(f"The unit is in grams. ")
 
     cost_per_unit = (ingredient_price / bought_amount * recipe_amount)
 
